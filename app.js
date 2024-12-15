@@ -80,9 +80,8 @@ app.post('/moon-phase', async (req, res) => {
 
 app.post('/clear-history', async (req, res) => {
     try {
-        await collection.deleteMany({}); // Delete all documents in the collection
-        console.log('Database cleared.');
-        res.redirect('/history'); // Redirect back to the history page
+        await collection.deleteMany({}); 
+        res.redirect('/history'); 
     } catch (error) {
         console.error('Error clearing database:', error);
         res.status(500).send('Failed to clear history.');
