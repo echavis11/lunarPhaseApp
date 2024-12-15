@@ -1,0 +1,58 @@
+/* Style for the page container */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center; /* Center the content horizontally */
+    align-items: center; /* Center the content vertically */
+    min-height: 100vh; /* Full viewport height */
+    background-color: #2e003e; /* Optional: Dark background outside the border */
+}
+
+/* Add a dark purple border and light purple background */
+.container {
+    border: 5px solid #4b0082; /* Dark purple border */
+    background-color: #e6ccff; /* Light purple background */
+    border-radius: 10px; /* Optional: Rounded corners */
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center all items inside horizontally */
+    justify-content: center; /* Center all items inside vertically */
+    width: 90%;
+    max-width: 1200px; /* Limit width for larger screens */
+    min-height: 80vh; /* Ensure enough height inside the border */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+}
+
+/* Style buttons */
+button, a.button {
+    display: inline-block;
+    background-color: #4b0082; /* Dark purple button */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 10px;
+    text-decoration: none; /* Remove underline for button links */
+}
+
+button:hover, a.button:hover {
+    background-color: #6a0dad; /* Lighter purple on hover */
+}
+
+/* Center heading and other content */
+.container h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.container form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
