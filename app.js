@@ -62,8 +62,8 @@ app.post('/moon-phase', async (req, res) => {
         const lunarData = response.data;
 
         await collection.insertOne({
-            latitude: lat,
-            longitude: lon,
+            lat: lat,
+            lon: lon,
             date,
             time,
             timestamp,
