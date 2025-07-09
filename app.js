@@ -49,6 +49,8 @@ app.post('/moon-phase', async (req, res) => {
   const [yyyy, mm, dd] = date.split("-");
   const formattedDate = `${mm}-${dd}-${yyyy}`;
 
+  console.log("📅 Formatted date:", formattedDate);
+
   try {
     const response = await axios.get('https://moon-phases-api-apiverve.p.rapidapi.com/v1/', {
       params: { date: formattedDate },
@@ -58,6 +60,8 @@ app.post('/moon-phase', async (req, res) => {
         'Accept': 'application/json'
       }
     });
+
+    console.log("✅ API response data:", response.data);
 
     const moonData = response.data.data;
 
@@ -70,7 +74,13 @@ app.post('/moon-phase', async (req, res) => {
     res.render('result', { moonData, date });
 
   } catch (error) {
-    console.error('Error fetching APIVerve moon data:', error.response?.data || error.message);
+    console.error("❌ Error fetching APIVerve moon data:");
+    if (error.response) {
+      console.error("Status:", error.response.status);
+      console.error("Data:", error.response.data);
+    } else {
+      console.error(error.message);
+    }
     res.status(500).send('Failed to fetch lunar phase data.');
   }
 });
