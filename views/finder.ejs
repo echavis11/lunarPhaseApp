@@ -1,30 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lunar Finder</title>
-    <link rel="stylesheet" href="/styles.css">
+  <meta charset="UTF-8" />
+  <title>Lunar Finder</title>
+  <link rel="stylesheet" href="/styles.css" />
 </head>
 <body>
-    <div class="container">
-        <h1>Lunar Finder</h1>
-        <form action="/moon-phase" method="POST">
-            <label for="lat">Latitude:</label>
-            <input type="text" id="lat" name="lat" placeholder="Enter latitude (e.g., 51.5074)" required>
-            
-            <label for="lon">Longitude:</label>
-            <input type="text" id="lon" name="lon" placeholder="Enter longitude (e.g., -0.1278)" required>
-            
-            <label for="date">Date:</label>
-            <input type="date" id="date" name="date" required>
-            
-            <label for="time">Time:</label>
-            <input type="time" id="time" name="time" required>
-            
-            <button type="submit">Find Moon Phase</button>
-        </form>
-        <a href="/" class="button">Back to Home</a>
-    </div>
+  <div class="container">
+    <h1>Lunar Finder</h1>
+    <form action="/moon-phase" method="POST">
+      <label for="date">Select a date:</label>
+      <input type="date" id="date" name="date" required>
+      <button type="submit">Find Moon Phase</button>
+    </form>
+    <a href="/" class="button">Back to Home</a>
+  </div>
 </body>
 </html>

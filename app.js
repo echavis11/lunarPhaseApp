@@ -45,48 +45,35 @@ app.get('/history', async (req, res) => {
 });
 
 app.post('/moon-phase', async (req, res) => {
-  let { lat, lon, date, time } = req.body;
-  lat = parseFloat(lat);
-  lon = parseFloat(lon);
+  const { date } = req.body;
+  const [yyyy, mm, dd] = date.split("-");
+  const formattedDate = `${mm}-${dd}-${yyyy}`;
 
   try {
-    // Fetch basic lunar data
-    const basicResponse = await axios.get('https://moon-phase.p.rapidapi.com/basic', {
-      params: { lat, lon },
+    const response = await axios.get('https://moon-phases-api-apiverve.p.rapidapi.com/v1/', {
+      params: { date: formattedDate },
       headers: {
-        'X-RapidAPI-Key': process.env.RAPIDAPI_KEY,
-        'X-RapidAPI-Host': 'moon-phase.p.rapidapi.com'
+        'x-rapidapi-key': process.env.RAPIDAPI_KEY,
+        'x-rapidapi-host': 'moon-phases-api-apiverve.p.rapidapi.com',
+        'Accept': 'application/json'
       }
     });
 
-    // Fetch emoji representation
-    const emojiResponse = await axios.get('https://moon-phase.p.rapidapi.com/emoji', {
-      headers: {
-        'X-RapidAPI-Key': process.env.RAPIDAPI_KEY,
-        'X-RapidAPI-Host': 'moon-phase.p.rapidapi.com'
-      }
-    });
-
-    const lunarData = basicResponse.data;
-    lunarData.emoji = emojiResponse.data;
+    const moonData = response.data.data;
 
     await collection.insertOne({
-      lat,
-      lon,
       date,
-      time,
-      queryAt: new Date(),
-      lunarData
+      moonData,
+      queryAt: new Date()
     });
 
-    res.render('result', { lunarData });
+    res.render('result', { moonData, date });
 
   } catch (error) {
-    console.error('Error fetching lunar data:', error.response?.data || error.message);
+    console.error('Error fetching APIVerve moon data:', error.response?.data || error.message);
     res.status(500).send('Failed to fetch lunar phase data.');
   }
 });
-
 
 app.post('/clear-history', async (req, res) => {
     try {

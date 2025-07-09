@@ -1,22 +1,21 @@
+<!-- views/result.ejs -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
   <title>Moon Phase Result</title>
-  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
   <div class="container">
-    <h1>Moon Phase Details <span class="moon-emoji"><%= lunarData.emoji %></span></h1>
-
-    <div class="moon-info">
-      <p><strong>Phase Name:</strong> <%= lunarData.phase_name %></p>
-      <p><strong>Stage:</strong> <%= lunarData.stage %></p>
-      <p><strong>Days Until Next Full Moon:</strong> <%= lunarData.days_until_next_full_moon %></p>
-      <p><strong>Days Until Next New Moon:</strong> <%= lunarData.days_until_next_new_moon %></p>
-    </div>
-
+    <h1>Moon Phase for <%= date %> <span style="font-size: 2rem;"><%= moonData.phaseEmoji %></span></h1>
+    <p><strong>Phase:</strong> <%= moonData.phase %></p>
+    <p><strong>Waxing:</strong> <%= moonData.waxing ? "Yes" : "No" %></p>
+    <p><strong>Waning:</strong> <%= moonData.waning ? "Yes" : "No" %></p>
+    <p><strong>Lunar Age:</strong> <%= moonData.lunarAge.toFixed(2) %> days</p>
+    <p><strong>Next Full Moon:</strong> <%= new Date(moonData.nextFullMoon).toLocaleDateString() %></p>
+    <p><strong>Last Full Moon:</strong> <%= new Date(moonData.lastFullMoon).toLocaleDateString() %></p>
+    
     <a href="/finder" class="button">Back to Finder</a>
     <a href="/" class="button">Back to Home</a>
   </div>
