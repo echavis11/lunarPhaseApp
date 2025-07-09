@@ -1,49 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Query History</title>
-    <link rel="stylesheet" href="/styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Query History</title>
+  <link rel="stylesheet" href="/styles.css" />
 </head>
 <body>
-    <div class="container">
-        <h1>Query History</h1>
-        <% if (history.length > 0) { %>
-            <table border="2">
-                <thead>
-                    <tr>
-                        <th>Latitude</th>
-                        <th>Longitude</th>
-                        <th>Date</th>
-                        <th>Time</th>
-                        <th>Phase Description</th>
-                        <th>Completion (%)</th>
-                        <th>Queried At</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <% history.forEach(record => { %>
-                        <tr>
-                            <td><%= record.lat %></td>
-                            <td><%= record.lon %></td>
-                            <td><%= record.date %></td>
-                            <td><%= record.time %></td>
-                            <td><%= record.lunarData.Phase_Description %></td>
-                            <td><%= record.lunarData.Phase.toFixed(2) %></td>
-                            <td><%= new Date(record.createdAt).toLocaleString() %></td>
-                        </tr>
-                    <% }) %>
-                </tbody>
-            </table>
-        <% } else { %>
-            <p>No history available. Try searching for a lunar phase!</p>
-        <% } %>
-        <form action="/clear-history" method="POST" onsubmit="return confirm('Are you sure you want to clear the database? This action cannot be undone.');">
-            <button type="submit">Clear Database</button>
-        </form>
-        <a href="/" class="button">Back to Home</a>
-    </div>
+  <div class="container">
+    <h1>Query History</h1>
+
+    <% if (history.length > 0) { %>
+      <table class="history-table">
+        <thead>
+          <tr>
+            <th>Latitude</th>
+            <th>Longitude</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Phase Name</th>
+            <th>Emoji</th>
+            <th>Stage</th>
+            <th>Days Until Full Moon</th>
+            <th>Days Until New Moon</th>
+            <th>Queried At</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% history.forEach(record => { %>
+            <tr>
+              <td><%= record.lat %></td>
+              <td><%= record.lon %></td>
+              <td><%= record.date %></td>
+              <td><%= record.time %></td>
+              <td><%= record.lunarData.phase_name %></td>
+              <td class="emoji-cell"><%= record.lunarData.emoji || '🌑' %></td>
+              <td><%= record.lunarData.stage %></td>
+              <td><%= record.lunarData.days_until_next_full_moon %></td>
+              <td><%= record.lunarData.days_until_next_new_moon %></td>
+              <td><%= new Date(record.queryAt).toLocaleString() %></td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    <% } else { %>
+      <p>No history available. Try searching for a lunar phase!</p>
+    <% } %>
+
+    <form action="/clear-history" method="POST" onsubmit="return confirm('Are you sure you want to clear the database? This action cannot be undone.');">
+      <button type="submit" class="button danger">Clear Database</button>
+    </form>
+
+    <a href="/" class="button">Back to Home</a>
+  </div>
 </body>
 </html>
-

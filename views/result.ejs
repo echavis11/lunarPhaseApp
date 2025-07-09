@@ -1,18 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Moon Phase Result</title>
-    <link rel="stylesheet" href="/styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Moon Phase Result</title>
+  <link rel="stylesheet" href="/styles.css" />
 </head>
 <body>
-    <div class="container">
-        <h1>Moon Phase Details</h1>
-        <p><strong>Description:</strong> <%= lunarData.Phase_Description %></p>
-        <p><strong>Completion Percentage:</strong> <%= lunarData.Phase.toFixed(2) %></p>
-        <a href="/finder">Back to Finder</a>
-        <a href="/">Back to Home</a>
+  <div class="container">
+    <h1>Moon Phase Details <span class="moon-emoji"><%= lunarData.emoji %></span></h1>
+
+    <div class="moon-info">
+      <p><strong>Phase Name:</strong> <%= lunarData.phase_name %></p>
+      <p><strong>Stage:</strong> <%= lunarData.stage %></p>
+      <p><strong>Days Until Next Full Moon:</strong> <%= lunarData.days_until_next_full_moon %></p>
+      <p><strong>Days Until Next New Moon:</strong> <%= lunarData.days_until_next_new_moon %></p>
     </div>
+
+    <a href="/finder" class="button">Back to Finder</a>
+    <a href="/" class="button">Back to Home</a>
+  </div>
 </body>
 </html>

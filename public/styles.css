@@ -1,54 +1,123 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center; 
-    align-items: center; 
-    min-height: 100vh; 
-    background-color: #2e003e; 
+/* General Reset */
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #1e1e2f;
+  color: #f0f0f5;
+  min-height: 100vh;
 }
 
 .container {
-    border: 5px solid #4b0082; 
-    background-color: #e6ccff; 
-    border-radius: 10px; 
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center; 
-    justify-content: center; 
-    width: 90%;
-    max-width: 1200px; 
-    min-height: 80vh; 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 1.5rem 2rem;
+  background: #2c2c44;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(200, 200, 255, 0.3);
 }
 
-button, a.button {
-    display: inline-block;
-    background-color: #4b0082; 
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    text-align: center;
-    font-size: 16px;
-    cursor: pointer;
-    margin: 10px;
-    text-decoration: none; 
+/* Buttons */
+.button {
+  display: inline-block;
+  margin: 1rem 0.5rem 0 0;
+  padding: 0.6rem 1.2rem;
+  background-color: #4a90e2;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: background-color 0.3s ease;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  text-align: center;
 }
 
-button:hover, a.button:hover {
-    background-color: #6a0dad; 
+.button:hover {
+  background-color: #357ABD;
 }
 
-.container h1 {
-    text-align: center;
-    margin-bottom: 20px;
+.button.danger {
+  background-color: #e24a4a;
 }
 
-.container form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.button.danger:hover {
+  background-color: #b83232;
+}
+
+/* Table Styling */
+.history-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.history-table th, .history-table td {
+  padding: 0.7rem 1rem;
+  border: 1px solid #444;
+  text-align: center;
+}
+
+.history-table thead {
+  background-color: #3a3a5a;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.history-table tbody tr:hover {
+  background-color: #444466;
+}
+
+/* Emoji column */
+.emoji-cell {
+  font-size: 1.5rem;
+}
+
+/* Headings */
+h1 {
+  font-weight: 700;
+  color: #a8cdf1;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+/* Moon emoji in result */
+.moon-emoji {
+  font-size: 2.5rem;
+  user-select: none;
+}
+
+/* Moon info in result */
+.moon-info p {
+  font-size: 1.1rem;
+  margin: 0.3rem 0;
+}
+
+/* Form inputs and labels in finder */
+form label {
+  display: block;
+  margin: 0.7rem 0 0.3rem;
+  font-weight: 600;
+}
+
+form input[type="text"],
+form input[type="date"],
+form input[type="time"] {
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: none;
+  box-sizing: border-box;
+  font-size: 1rem;
+}
+
+form button[type="submit"] {
+  margin-top: 1rem;
+}
+
+/* Link buttons */
+a.button {
+  margin-right: 0.7rem;
 }

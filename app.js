@@ -45,38 +45,48 @@ app.get('/history', async (req, res) => {
 });
 
 app.post('/moon-phase', async (req, res) => {
-    const { lat, lon, date, time } = req.body;
+  let { lat, lon, date, time } = req.body;
+  lat = parseFloat(lat);
+  lon = parseFloat(lon);
 
-    try {
-        const dateTime = new Date(`${date}T${time}:00`);
-        const timestamp = Math.floor(dateTime.getTime() / 1000);
+  try {
+    // Fetch basic lunar data
+    const basicResponse = await axios.get('https://moon-phase.p.rapidapi.com/basic', {
+      params: { lat, lon },
+      headers: {
+        'X-RapidAPI-Key': process.env.RAPIDAPI_KEY,
+        'X-RapidAPI-Host': 'moon-phase.p.rapidapi.com'
+      }
+    });
 
-        const response = await axios.get('https://luna-phase.p.rapidapi.com/Luna_Phase', {
-            params: { lat, lon, timestamp },
-            headers: {
-                'X-RapidAPI-Key': process.env.RAPIDAPI_KEY,
-                'X-RapidAPI-Host': 'luna-phase.p.rapidapi.com'
-            }
-        });
+    // Fetch emoji representation
+    const emojiResponse = await axios.get('https://moon-phase.p.rapidapi.com/emoji', {
+      headers: {
+        'X-RapidAPI-Key': process.env.RAPIDAPI_KEY,
+        'X-RapidAPI-Host': 'moon-phase.p.rapidapi.com'
+      }
+    });
 
-        const lunarData = response.data;
+    const lunarData = basicResponse.data;
+    lunarData.emoji = emojiResponse.data;
 
-        await collection.insertOne({
-            lat: lat,
-            lon: lon,
-            date,
-            time,
-            timestamp,
-            lunarData,
-            createdAt: new Date()
-        });
+    await collection.insertOne({
+      lat,
+      lon,
+      date,
+      time,
+      queryAt: new Date(),
+      lunarData
+    });
 
-        res.render('result', { lunarData });
-    } catch (error) {
-        console.error('Error fetching data:', error);
-        res.status(500).send('Failed to fetch lunar phase data.');
-    }
+    res.render('result', { lunarData });
+
+  } catch (error) {
+    console.error('Error fetching lunar data:', error.response?.data || error.message);
+    res.status(500).send('Failed to fetch lunar phase data.');
+  }
 });
+
 
 app.post('/clear-history', async (req, res) => {
     try {
